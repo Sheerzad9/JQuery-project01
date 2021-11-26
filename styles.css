@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+.side-bar{
+    height: 800px;
+    background-color: aqua;
+    padding: 50px;
+}
+
+.side-bar-header{
+    text-align: center;
+    background-color: white;
+}
+
+.main-content{
+    text-align: center;
+}
