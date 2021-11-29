@@ -15,42 +15,57 @@
     <script defer src="main.js"></script>
     <title>Check corona status</title>
   </head>
-  <body>
+  <body style="background-color: #8cf3fc; padding: 15px">
     <div class="row">
-      <div class="side-bar col-md-4">
-        <div class="side-bar-header">
-          <h3>Welcome to search nation</h3>
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat
-          </p>
-          <br /><br />
-        </div>
-        <div class="side-bar-search">
-          <input
-            type="text"
-            class="search-input"
-            placeholder="Enter text here..."
-          /><br /><br />
-          <button class="search-button">Search</button>
-        </div>
-        <div id="flip">Click to see recently searched</div>
-        <div id="recent-search-list">
-          <ul class="list"></ul>
+      <div class="col-md-4">
+        <div class="side-bar col-md-12">
+          <div class="side-bar-header">
+            <h3>Welcome</h3>
+            <br />
+            <p>
+              In this application you can search any country and get current
+              Covid-19 records. In addition, EU-countries will be shown with
+              current travel status.<br />
+            </p>
+            <h5 style="color: darkgreen">
+              Green indicates that it's safe to travel to searched country
+            </h5>
+            <h5 style="color: darkorange">
+              Orange indicates that caution should be taken
+            </h5>
+            <h5 style="color: darkred">
+              Red circle indicates that it's strognly advised not to visit the
+              country
+            </h5>
+            <br /><br />
+          </div>
+          <div class="side-bar-search">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Enter text here..."
+            /><br /><br />
+            <button class="search-button">Search</button>
+          </div>
+          <div id="flip">Click to see recently searched</div>
+          <div id="recent-search-list">
+            <ul class="list"></ul>
+          </div>
         </div>
       </div>
-      <div class="main-content col-md-8">
-        <div class="nation-flag" style="text-align: center"></div>
-        <br /><br />
-        <div class="row">
-          <div class="col">
-            <div class="ratios"></div>
-          </div>
-          <div class="col">
-            <div class="situation"></div>
+      <div class="col-md-8">
+        <div class="main-content col-md-12">
+          <div class="nation-flag" style="text-align: center"></div>
+          <br /><br />
+          <div class="row">
+            <div class="col">
+              <div class="back-ratios">
+                <div class="ratios"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="situation"></div>
+            </div>
           </div>
         </div>
       </div>

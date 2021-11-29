@@ -30,11 +30,9 @@ $(document).ready(() => {
       },
     })
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((data) => {
-        console.log(data[0]);
         renderTravelStatus(data[0]);
       })
       .catch((err) => {
@@ -43,7 +41,12 @@ $(document).ready(() => {
   }
   // Render travel status
   function renderTravelStatus(data) {
-    html = `
+    if (typeof data == "undefined") {
+      html = `<h3 style='text-align: center'>Search EU-country for travel status</h3>`;
+      $(html).hide().appendTo(".situation").fadeIn(3000);
+      $(".situation").addClass("black-borders");
+    } else {
+      html = `
       <h3 style='text-align: center;'>Travel Status&emsp;<span class='dot' style='background-color: ${
         data.colour
       };'></span></h3><br>
@@ -52,22 +55,23 @@ $(document).ready(() => {
         2
       )}%</h5><br><br>`;
 
-    $(html).hide().appendTo(".situation").fadeIn(3000);
-    $(".situation").addClass("black-borders");
+      $(html).hide().appendTo(".situation").fadeIn(3000);
+      $(".situation").addClass("black-borders");
+    }
   }
 
   // Render corona history
   function renderCovidHistory(data) {
     html = `
       <h3 style='text-align: center;'>Covid-19 Stats</h3><br>
-      <h5 style='font-weight: bold;'>Confirmed cases: ${
+      <h5 style='font-weight: bold;'>Registered confirmed cases: ${
         data.confirmed > 1000000
-          ? (data.confirmed / 1000000).toFixed(1) + " million"
+          ? (data.confirmed / 1000000).toFixed(2) + " million"
           : (data.confirmed / 100000).toFixed(1) + " hundred thousand"
       }</h5><br>
-      <h5 style='font-weight: bold;'>Recovery cases: ${
+      <h5 style='font-weight: bold;'>Registered recovery cases: ${
         data.recovered > 1000000
-          ? (data.recovered / 1000000).toFixed(1) + " million"
+          ? (data.recovered / 1000000).toFixed(2) + " million"
           : (data.recovered / 100000).toFixed(1) + " hundred thousand"
       }</h5><br>
       <h5 style='font-weight: bold;'>Death cases: ${data.deaths}</h5><br><br>`;
@@ -91,7 +95,7 @@ $(document).ready(() => {
 
   // Adding country flag
   function renderNationFlag(data) {
-    html = `<img class="country__img" src="${data.flags.png}" /><br><br><h2>${data.name.common}</h2>`;
+    html = `<img class="country__img" src="${data.flags.png}" /><br><br><h2 style='font-weight: bold;'>${data.name.common}</h2>`;
     $(html).hide().appendTo(".nation-flag").fadeIn(2000);
   }
 
@@ -103,17 +107,29 @@ $(document).ready(() => {
       ).val()}?fullText=true`
     )
       .then((res) => {
+        if (!res.ok) {
+          throw new Error(
+            `The country you searched "${$(
+              ".search-input"
+            ).val()}" doesn't exist ☹ , please try again`
+          );
+        }
         data = res.json();
         return data;
       })
       .then((data) => {
-        console.log(data[0]);
+        if ($(".main-content").css("display") == "none") {
+          $(".main-content").css("display", "block").hide().fadeIn();
+        }
         renderNationFlag(data[0]);
         const correctInput =
           $(".search-input").val().charAt(0).toUpperCase() +
           $(".search-input").val().substring(1);
         fetchCovidHistory($(".search-input").val());
         fetchTravelStatus(correctInput);
+      })
+      .catch((error) => {
+        alert(error);
       });
   }
 
