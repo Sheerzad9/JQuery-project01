@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  // Below is the API which returns data of the current incidents of the country
+  // Below is the API which returns data of the current covid -19 incidents of the country
   function fetchCovidHistory(country_name) {
     fetch(`https://covid-19-data.p.rapidapi.com/country?name=${country_name}`, {
       method: "GET",
@@ -99,7 +99,7 @@ $(document).ready(() => {
     $(html).hide().appendTo(".nation-flag").fadeIn(2000);
   }
 
-  // this function fetches from our first API, after that we call two other API's
+  // this function fetches from our first API (Rest countries), after that we call two other API's, basically this function also checks the input, because if the first fetch response status is not ok (meaning user didn't spell the country correctly), we throw error and go to catch method directly
   function fetchData() {
     fetch(
       `https://restcountries.com/v3.1/name/${$(
@@ -132,13 +132,13 @@ $(document).ready(() => {
         alert(error);
       });
   }
-
+  //Waiting for user to click
   $("button").click(() => {
     clearPage();
     updateList();
     fetchData();
   });
-
+  // Waiting for user click here also :-)
   $("#flip").click(() => {
     $("#recent-search-list").slideToggle("slow");
   });
