@@ -6,4 +6,4 @@ I have used 3 different API:s in this project
 * EU-Covid-19 Travel API to show travel status. 
 The site is also responsive thanks to Bootstrap 🙏.
 
-Link to site: https://flamboyant-meitner-04f69d.netlify.app/
+**Link to site:** https://flamboyant-meitner-04f69d.netlify.app/
